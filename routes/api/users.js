@@ -29,7 +29,8 @@ router.post('/register', (req, res) => {
     User.findOne({email})
         .then(user => {
             if(user){
-                return res.status(404).json({ email: 'Email already exists' });
+                errors.email = 'Email already exists';
+                return res.status(404).json(errors);
             }else {
                 const avatar = gravatar.url(req.body.email, {
                     s: '200', // Size
@@ -73,7 +74,8 @@ router.post('/login', (req, res) => {
         .then(user => {
             // Check user
             if(!user){
-                return res.status(404).json({ email: 'User not found' })
+                errors.email = 'User not found';
+                return res.status(404).json(errors);
             }
             // Check password
             bcrypt.compare(password, user.password)
@@ -95,7 +97,8 @@ router.post('/login', (req, res) => {
                             }
                         );
                     } else {
-                        return res.json({ password: 'Password incorrect' })
+                        errors.password = 'Password incorrect';
+                        return res.status(400).json(errors);
                     }
                 })
         });
@@ -103,7 +106,7 @@ router.post('/login', (req, res) => {
 
 // @route   GET http://localhost:7777/api/users/current
 // @desc    Return Current User
-// @access  Public
+// @access  Private
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
     res.json({
         id: req.user.id,

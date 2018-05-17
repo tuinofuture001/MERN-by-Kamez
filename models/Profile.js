@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const ProfileSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'users' // ref to database 'users'
+        ref: 'users'    // ref to database 'users'
     },
     handle: {
         type: String,
@@ -25,15 +25,12 @@ const ProfileSchema = new Schema({
         type: String,
         require: true
     },
-    skill: {
+    skills: {
         type: [String], // ปะกาดให้เป็น array
         require: true
     },
     contact: {
         type: String, 
-    },
-    activity: {
-        type: String
     },
     bio: {
         type: String
@@ -81,8 +78,7 @@ const ProfileSchema = new Schema({
                 required: true
             },
             fieldofstudy: {
-                type: String,
-                required: true
+                type: String
             },
             from: {
                 type: Date,
