@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+// แนบ token ไปนำ header
+// Authorization = token ที่รับเข้ามา
 const setAuthToken = token => {
   if (token) {
     // Apply to every request

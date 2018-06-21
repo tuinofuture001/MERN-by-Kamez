@@ -20,13 +20,15 @@ class Register extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  // componentDidMount() {
-  //   if (this.props.auth.isAuthenticated) {
-  //     this.props.history.push('/dashboard');
-  //   }
-  // }
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+  }
 
+  // componentWillReceiveProps เมื่อมี props ใหม่เข้ามา(ในก็ละนีนี้แม่น this.props.errors)
   componentWillReceiveProps(nextProps) {
+    // ถ้ามี this.props.errors(ชื่งในนี้จะแทนด้วย nextProps.errors)
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
